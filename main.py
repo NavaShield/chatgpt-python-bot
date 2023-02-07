@@ -1,6 +1,3 @@
-# This is new in the discord.py 2.0 update
-
-# imports
 import os
 import openai
 from datetime import date
@@ -9,8 +6,8 @@ import discord.ext
 import interactions
 from dotenv import load_dotenv
 load_dotenv()
-bot = interactions.Client(token=os.getenv('TOKEN'))
-openai.api_key = os.getenv('OPENAI_API_KEY')
+bot = interactions.Client(token=os.getenv('token'))
+openai.api_key = os.getenv('apikey')
 
 @bot.command(
     name="chatgpt",
