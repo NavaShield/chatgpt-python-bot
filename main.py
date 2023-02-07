@@ -22,7 +22,7 @@ openai.api_key = os.getenv('apikey')
         ),
     ],
 )
-async def my_first_command(ctx: interactions.CommandContext, prompt: str):
+async def chatgpt(ctx: interactions.CommandContext, prompt: str):
     waitEmbed=interactions.Embed(title="ChatGPT", description="Please wait..", color=0xfee75c)
     waitEmbed.set_footer(text=f"Your question was: '{prompt}'")
     message = await ctx.send(embeds=waitEmbed)
@@ -39,5 +39,34 @@ async def my_first_command(ctx: interactions.CommandContext, prompt: str):
     successEmbed=interactions.Embed(title="ChatGPT", description=response, color=0x57f287)
     successEmbed.set_footer(text=f"Your question was: '{prompt}'")
     await message.edit(embeds=successEmbed)
+
+@bot.command(
+    name="imagegpt",
+    description="Generate an image using GPT-3!",
+    scope=630048726823731230,
+    options = [
+        interactions.Option(
+            name="image",
+            description="ImageGPT Prompt",
+            type=interactions.OptionType.STRING,
+            required=True,
+        ),
+    ],
+)
+async def imagegpt(ctx: interactions.CommandContext, prompt: str):
+    waitEmbed=interactions.Embed(title="ImageGPT", description="Please wait..", color=0xfee75c)
+    waitEmbed.set_footer(text=f"Your image was: '{image}'")
+    message = await ctx.send(embeds=waitEmbed)
+    response = openai.Image.create(
+      prompt=f"{image}",
+      n=1,
+      size="1024x1024"
+    )
+    successEmbed=interactions.Embed(title="ChatGPT", description=response, color=0x57f287)
+    successEmbed.set_footer(text=f"Your image was: '{image}'")
+    successEmbed.set_image(url=response['data'][0]['url'])
+    await message.edit(embeds=successEmbed)
+    
+
 
 bot.start()
