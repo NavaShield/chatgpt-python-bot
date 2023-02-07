@@ -53,12 +53,12 @@ async def chatgpt(ctx: interactions.CommandContext, prompt: str):
         ),
     ],
 )
-async def imagegpt(ctx: interactions.CommandContext, prompt: str):
+async def imagegpt(ctx: interactions.CommandContext, image: str):
     waitEmbed=interactions.Embed(title="ImageGPT", description="Please wait..", color=0xfee75c)
     waitEmbed.set_footer(text=f"Your image was: '{image}'")
     message = await ctx.send(embeds=waitEmbed)
     response = openai.Image.create(
-      prompt=f"{image}",
+      prompt=image,
       n=1,
       size="1024x1024"
     )
