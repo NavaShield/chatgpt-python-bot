@@ -64,7 +64,7 @@ async def imagegpt(ctx: interactions.CommandContext, image: str):
     )
     successEmbed=interactions.Embed(title="ChatGPT", description=response, color=0x57f287)
     successEmbed.set_footer(text=f"Your image was: '{image}'")
-    successEmbed.set_image(url=response['data'][0]['url'])
+    successEmbed.set_image(url=f"{response['data'][0]['url']}")
     await message.edit(embeds=successEmbed)
     
 
